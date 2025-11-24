@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:h1d023016_tugas8_petemuan10/bloc/produk_bloc.dart';
 import 'package:h1d023016_tugas8_petemuan10/model/produk.dart';
 import 'package:h1d023016_tugas8_petemuan10/ui/produk_form.dart';
+import 'package:h1d023016_tugas8_petemuan10/ui/produk_page.dart';
+import 'package:h1d023016_tugas8_petemuan10/widget/warning_dialog.dart';
 
 // ignore: must_be_immutable
 class ProdukDetail extends StatefulWidget {
@@ -16,23 +19,20 @@ class _ProdukDetailState extends State<ProdukDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // CUSTOM NAME ADDED HERE
-        title: const Text('Detail Produk Fatihul'),
-      ),
+      appBar: AppBar(title: const Text('Detail Produk Fatihul')),
       body: Center(
         child: Column(
           children: [
             Text(
-              "Kode: ${widget.produk!.kodeProduk}",
+              "Kode : ${widget.produk!.kodeProduk}",
               style: const TextStyle(fontSize: 20.0),
             ),
             Text(
-              "Nama: ${widget.produk!.namaProduk}",
+              "Nama : ${widget.produk!.namaProduk}",
               style: const TextStyle(fontSize: 18.0),
             ),
             Text(
-              "Harga: Rp. ${widget.produk!.hargaProduk.toString()}",
+              "Harga : Rp. ${widget.produk!.hargaProduk.toString()}",
               style: const TextStyle(fontSize: 18.0),
             ),
             _tombolHapusEdit(),
@@ -75,22 +75,21 @@ class _ProdukDetailState extends State<ProdukDetail> {
         OutlinedButton(
           child: const Text("Ya"),
           onPressed: () {
-            // Karena ini pertemuan 10 (UI Only), logika API belum ada.
-            // Kode dibawah ini dikomentari agar tidak error saat di-run.
-            /*
             ProdukBloc.deleteProduk(id: int.parse(widget.produk!.id!)).then(
-                (value) => {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const ProdukPage()))
-                    }, onError: (error) {
-              showDialog(
+              (value) => {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const ProdukPage()),
+                ),
+              },
+              onError: (error) {
+                showDialog(
                   context: context,
                   builder: (BuildContext context) => const WarningDialog(
-                        description: "Hapus gagal, silahkan coba lagi",
-                      ));
-            });
-            */
-            Navigator.pop(context); // Tutup dialog dummy
+                    description: "Hapus gagal, silahkan coba lagi",
+                  ),
+                );
+              },
+            );
           },
         ),
         //tombol batal
