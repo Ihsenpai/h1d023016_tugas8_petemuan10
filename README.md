@@ -77,3 +77,38 @@ Halaman formulir yang bersifat dinamis (Reusable).
 ---
 
 ## INTINYA AP? YES AKU KEREN MWAHAHAHHAHAHAHAHHAHAHA
+
+
+## PERTEMUAN 11 TUGAS 9
+
+ Aplikasi kini terhubung langsung dengan Backend API (CodeIgniter 4) untuk mengelola data secara *real-time*.
+
+### 🛠️ Perubahan & Penambahan Fitur
+
+#### 1. Manajemen Koneksi & Data (`lib/helpers`)
+Folder ini dibuat untuk menangani komunikasi teknis dengan server.
+* **`api.dart`**: Wrapper untuk *HTTP Request* (POST, GET, PUT, DELETE) yang menangani header token dan *error handling* (koneksi putus, server error, dll).
+* **`api_url.dart`**: Pusat konfigurasi *Endpoint*. URL disesuaikan dengan IP Laptop (`192.168.x.x`) agar bisa diakses via HP Fisik/Emulator.
+* **`user_info.dart`**: Menggunakan `shared_preferences` untuk menyimpan **Token** dan **User ID** agar user tetap login meskipun aplikasi ditutup.
+
+#### 2. Business Logic Component (`lib/bloc`)
+Pemisahan logika bisnis dari tampilan (UI) agar kode lebih bersih dan terstruktur.
+* **`registrasi_bloc.dart`**: Mengirim data pendaftaran ke API.
+* **`login_bloc.dart`**: Memverifikasi kredensial login dan menerima Token.
+* **`produk_bloc.dart`**: Jembatan untuk operasi CRUD (Create, Read, Update, Delete) data produk antara UI dan Server.
+* **`logout_bloc.dart`**: Menangani proses hapus sesi login.
+
+#### 3. Integrasi UI (`lib/ui`)
+Memodifikasi file UI yang dibuat di Pertemuan 10 agar bisa berinteraksi dengan BLoC.
+* **Login & Registrasi**: Tombol kini memanggil API, menampilkan *Dialog Sukses/Gagal*, dan mengarahkan user sesuai statusnya.
+* **Produk Page**: Menggunakan `FutureBuilder` untuk mengambil data list produk dari database secara asinkron.
+* **Form Produk**: Logika tombol "Simpan" kini mendeteksi apakah sedang dalam mode *Tambah* atau *Edit*, lalu mengirim request yang sesuai ke API.
+
+### ⚙️ Catatan Konfigurasi
+Untuk menjalankan aplikasi ini dengan lancar:
+1.  **Backend**: Pastikan server CodeIgniter 4 berjalan (`php spark serve --port 8080`).
+2.  **Koneksi**: Pastikan `api_url.dart` menggunakan IP Address yang sesuai dengan jaringan lokal (jika menggunakan HP Fisik).
+3.  **Database**: Pastikan MySQL di Laragon aktif.
+
+---
+**Status Proyek:** ✅ Selesai (Full Stack Mobile App dengan Flutter & CodeIgniter 4) namun masih eror dah nyerah saya
