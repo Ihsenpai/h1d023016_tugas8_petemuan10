@@ -1,5 +1,4 @@
 class ApiUrl {
-  // Ganti IP ini sesuai kondisi Anda (10.0.2.2 untuk Emulator)
   static const String baseUrl = 'http://localhost:8080/toko-api/public';
 
   static const String registrasi = baseUrl + '/registrasi';
